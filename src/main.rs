@@ -11,26 +11,31 @@ fn main() {
     ];
 
     let mut iter = 1;
+    println!();
     loop {
-        clear_terminal_screen();
+        //clear_terminal_screen();
+        print!("\x1b[25l");
         print_steam(&steam);
+        print!("\x1b[31m");
         println!(
             "
            ██████████████████████
-           ██                  ██
-           ██                  ███████
-           ██                  ██   ██
-           ██                  ███████
-             ██              ██
+           ██████████████████████
+           ███████████████████████████
+           ██████████████████████   ██
+           ███████████████████████████
+             ██████████████████
         █████████████████████████████
         ██                         ██
           █████████████████████████
         "
         );
+        print!("\x1b[0m");
 
         steam = animation(steam, iter);
         iter += 1;
         thread::sleep(time::Duration::from_millis(650));
+        clear();
     }
 }
 
@@ -87,6 +92,12 @@ fn print_steam(steam: &[[i32; 8]; 5]) {
             }
         }
         println!();
+    }
+}
+
+fn clear() {
+    for _i in 0..16 {
+        print!("\x1b[A\x1b[2K");
     }
 }
 
